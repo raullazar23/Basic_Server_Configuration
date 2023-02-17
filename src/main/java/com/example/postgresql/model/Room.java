@@ -1,10 +1,12 @@
 package com.example.postgresql.model;
 
-
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
-@Table(name="Room")
+@NoArgsConstructor
+@Table(name="room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,27 +15,15 @@ public class Room {
     @Column(name = "nume")
     private String nr;
 
-    @Column(name= "profesor")
-    private String proffesor;
-
+    @Column(name= "professor")
+    private String professor;
     @Column(name="discipline")
     private String discipline;
 
-    public Room(Long id, String nr, String proffesor, String discipline) {
+    public Room(Long id, String nr, String professor, String discipline) {
         this.id = id;
         this.nr = nr;
-        this.proffesor = proffesor;
-    }
-
-    public Room() {
-
-    }
-
-    public String getDiscipline() {
-        return discipline;
-    }
-
-    public void setDiscipline(String discipline) {
+        this.professor = professor;
         this.discipline = discipline;
     }
 
@@ -49,16 +39,24 @@ public class Room {
         return nr;
     }
 
-    public void setNr(String name) {
-        this.nr = name;
+    public void setNr(String nr) {
+        this.nr = nr;
     }
 
-    public String getProffesor() {
-        return proffesor;
+    public String getProfessor() {
+        return professor;
     }
 
-    public void setProffesor(String proffesor) {
-        this.proffesor = proffesor;
+    public void setProfessor(String proffesor) {
+        this.professor = proffesor;
+    }
+
+    public String getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
     }
 
 }

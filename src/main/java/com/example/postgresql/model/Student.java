@@ -1,27 +1,25 @@
 package com.example.postgresql.model;
 
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Student")
+@NoArgsConstructor
+@Table(name="student")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name="name")
     private String name;
-    @Column(name="discipline")
-    private String discipline;
 
-    public Student() {
-    }
+    //citeste despre cascade
 
-    public Student(Long id, String name, String discipline) {
+    public Student(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.discipline = discipline;
     }
 
     public Long getId() {
@@ -40,11 +38,4 @@ public class Student {
         this.name = name;
     }
 
-    public String getDiscipline() {
-        return discipline;
-    }
-
-    public void setDiscipline(String description) {
-        this.discipline = description;
-    }
 }

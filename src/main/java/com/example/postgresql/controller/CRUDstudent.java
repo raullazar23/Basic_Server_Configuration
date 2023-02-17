@@ -15,7 +15,6 @@ public class CRUDstudent {
 
     private final StudentRepository studentRepository;
 
-
     public CRUDstudent(StudentRepository studentRepository, StudentRepository studentRepository1) {
         this.studentRepository = studentRepository1;
     }
@@ -26,9 +25,9 @@ public class CRUDstudent {
     }
 
     //ID search Room/Student
-    @GetMapping("/student/{studentID}")
-    public ResponseEntity findByIdStudent(@PathVariable Long studentID) {
-        return ResponseEntity.ok(studentRepository.findById(studentID));
+    @GetMapping("/student/{studentIDr}")
+    public ResponseEntity findByIdStudent(@PathVariable Long studentIDr) {
+        return ResponseEntity.ok(studentRepository.findById(studentIDr));
     }
 
     //Total Delete/ID delete
@@ -51,18 +50,18 @@ public class CRUDstudent {
     @PostMapping
     public ResponseEntity InsertDataStudent(@RequestBody Student student) {
 
-        if (student.getId() == null || student.getName() == null || student.getDiscipline() == null) {
+        if (student.getName() == null ) {
             return ResponseEntity.badRequest().body("Not enough info Student");
         }
 
         Student savedstudent = studentRepository.save(student);
 
         if (savedstudent != null) {
-            return ResponseEntity.ok("Yay");
-            //return ResponseEntity.ok(student.getId());
+            return ResponseEntity.ok(student.getId());
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed");
         }
+
     }
 
 
@@ -74,16 +73,16 @@ public class CRUDstudent {
         Student existingStudent = student.get();
 
         existingStudent.setName(newstudent.getName());
-        existingStudent.setDiscipline(newstudent.getDiscipline());
 
         studentRepository.save(existingStudent);
 
         return ResponseEntity.ok("Done I guess");
     }
 
-@GetMapping("/search/{searchTerm}")
+    @GetMapping("/search/{searchTerm}")
     public List<Student> findByTerm(@PathVariable String searchTerm){
     return studentRepository.findAllBySearchTerm(searchTerm);
 }
+
 
 }
