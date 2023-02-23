@@ -7,11 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
     @Query("Select p from Customer p WHERE concat( p.id, p.name) Like %:searchTerm%")
     List<Customer> findAllBySearchTerm(@Param("searchTerm") String searchTerm);
+    Optional<Customer> findByUserName(String userName);
 
 
 }

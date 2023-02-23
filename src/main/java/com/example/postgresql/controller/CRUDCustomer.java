@@ -76,6 +76,9 @@ public class CRUDCustomer {
         Customer existingCustomer = customer.get();
 
         existingCustomer.setName(newcustomer.getName());
+        existingCustomer.setPassword(newcustomer.getPassword());
+        existingCustomer.setUserName(newcustomer.getUserName());
+        existingCustomer.setRoles(newcustomer.getRoles());
 
         customerRepository.save(existingCustomer);
 
