@@ -81,7 +81,7 @@ public class CRUDOrders {
     }
 
 
-    @GetMapping("/search/{searchTerm}")
+    @GetMapping("/term/{searchTerm}")
     public List<Orders> findByTerm(@PathVariable String searchTerm){
         return ordersRepository.findAllBySearchTerm(searchTerm);
     }

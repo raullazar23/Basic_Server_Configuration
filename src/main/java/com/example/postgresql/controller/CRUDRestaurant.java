@@ -69,13 +69,13 @@ public class CRUDRestaurant {
 
     //Update
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable long id) {
+    public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable long id) {
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
 
-        if (!restaurantOptional.isPresent())
+        if (restaurantOptional.isEmpty())
             return ResponseEntity.notFound().build();
 
-        restaurant.setId((int) restaurant.getId());
+        restaurant.setId(restaurant.getId());
         restaurant.setAddress(restaurant.getAddress());
         restaurant.setManager(restaurant.getManager());
         restaurantRepository.save(restaurant);
@@ -83,7 +83,7 @@ public class CRUDRestaurant {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{searchTerm}")
+    @GetMapping("/term/{searchTerm}")
     public List<Restaurant> findByTerm(@PathVariable String searchTerm){
     return restaurantRepository.findAllBySearchTerm(searchTerm);
 }

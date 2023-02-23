@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
-    @Query("Select p from Orders p WHERE concat( p.id, p.number, p.customer, p.description) LIKE %:searchTerm%")
+    @Query("Select p from Orders p WHERE concat( p.id, p.number, p.customer.name,p.restaurant.address, p.description) LIKE %:searchTerm%")
     List<Orders> findAllBySearchTerm(@Param("searchTerm") String searchTerm);
 
 

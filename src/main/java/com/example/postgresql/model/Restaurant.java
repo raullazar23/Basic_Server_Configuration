@@ -13,7 +13,7 @@ import java.util.Set;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column(name="address")
     private String address;
     @Column(name="manager")
@@ -27,11 +27,11 @@ public class Restaurant {
         this.manager = manager;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

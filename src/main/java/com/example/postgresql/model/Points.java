@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Points {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private int number;
 
@@ -17,11 +17,11 @@ public class Points {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

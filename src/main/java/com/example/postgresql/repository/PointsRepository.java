@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface PointsRepository extends JpaRepository<Points, Long>{
-    @Query("Select p from Points p WHERE concat( p.id, p.number, p.customer) Like %:searchTerm%")
+    @Query("Select p from Points p WHERE concat( cast(p.id as text), cast(p.number as text), p.customer.name) Like %:searchTerm%")
     List<Points> findAllBySearchTerm(@Param("searchTerm") String searchTerm);
 
 

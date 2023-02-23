@@ -26,8 +26,11 @@ public class CRUDCustomer {
 
     //ID search Orders/Customer
     @GetMapping("/{customerID}")
-    public ResponseEntity findByIdCustomer(@PathVariable Long customerID) {
-        return ResponseEntity.ok(customerRepository.findById(customerID));
+    public Customer findByIdCustomer(@PathVariable Long customerID) {
+//        return ResponseEntity.ok(customerRepository.findById(customerID));
+        Optional<Customer> customer= customerRepository.findById(customerID);
+        return customer.get();
+
     }
 
     //Total Delete/ID delete
@@ -79,7 +82,7 @@ public class CRUDCustomer {
         return ResponseEntity.ok("Done I guess");
     }
 
-    @GetMapping("/{searchTerm}")
+    @GetMapping("/term/{searchTerm}")
     public List<Customer> findByTerm(@PathVariable String searchTerm){
     return customerRepository.findAllBySearchTerm(searchTerm);
 }

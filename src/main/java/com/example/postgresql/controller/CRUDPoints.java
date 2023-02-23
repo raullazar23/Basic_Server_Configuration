@@ -2,6 +2,7 @@ package com.example.postgresql.controller;
 
 import com.example.postgresql.model.Points;
 import com.example.postgresql.repository.PointsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +14,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping({"/points"})
 public class CRUDPoints {
+    @Autowired
+    private PointsRepository pointsRepository;
 
-    private final PointsRepository pointsRepository;
-
-    public CRUDPoints(PointsRepository pointsRepository, PointsRepository pointsRepository1) {
-        this.pointsRepository = pointsRepository1;
-    }
+//    public CRUDPoints(PointsRepository pointsRepository) {
+//        this.pointsRepository = pointsRepository;
+//    }
 
     @GetMapping
     public ResponseEntity getAllProducts() {
@@ -26,9 +27,9 @@ public class CRUDPoints {
     }
 
     //ID search
-    @GetMapping("/{pointsID}")
-    public ResponseEntity findByIdPoints(@PathVariable Long pointsID) {
-        return ResponseEntity.ok(pointsRepository.findById(pointsID));
+    @GetMapping("/{id}")
+    public ResponseEntity findByIdPoints(@PathVariable Long id) {
+        return ResponseEntity.ok(pointsRepository.findById(id));
     }
 
     //Total Delete/ID delete
@@ -71,7 +72,7 @@ public class CRUDPoints {
     @PutMapping("/{id}")
     public ResponseEntity Update(@PathVariable Long id,@RequestBody Points newpoints)
     {
-        if (newpoints.getCustomer()==null){
+        if (newpoints==null){
             return ResponseEntity.ok("Nu merge");
         }else{
         Optional<Points> points = pointsRepository.findById(id);
@@ -87,7 +88,7 @@ public class CRUDPoints {
     }
     }
 
-    @GetMapping("/{searchTerm}")
+    @GetMapping("/term/{searchTerm}")
     public List<Points> findByTerm(@PathVariable String searchTerm){
     return pointsRepository.findAllBySearchTerm(searchTerm);
 }
